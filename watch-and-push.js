@@ -7,12 +7,7 @@ const WATCH_DIR = __dirname;
 
 // Patterns to ignore (always ignore git, node_modules, build outputs, local env files)
 const IGNORE_PATTERNS = [
-  /[\\/]\.git[\\/]/,
-  /[\\/]node_modules[\\/]/,
-  /[\\/]\.next[\\/]/,
-  /[\\/]out[\\/]/,
-  /[\\/]build[\\/]/,
-  /[\\/]coverage[\\/]/,
+  /(^|[\\/])(\.git|node_modules|\.next|out|build|coverage)([\\/]|$)/,
   /\.env.*\.local$/,
   /\.tsbuildinfo$/,
   /\.DS_Store$/,
