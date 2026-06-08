@@ -76,8 +76,6 @@ export async function middleware(request: NextRequest) {
     user &&
     (pathname === '/login' || pathname === '/register')
   ) {
-    const url = request.nextUrl.clone();
-
     // Check role to redirect to correct dashboard
     const { data: profile } = await supabase
       .from('profiles')
@@ -85,7 +83,14 @@ export async function middleware(request: NextRequest) {
       .eq('id', user.id)
       .single();
 
-    url.pathname = profile?.role === 'admin' ? '/admin' : '/dashboard';
+    if (!profile) {
+      // If the user profile does not exist in the database, allow them to view
+      // the login/register pages so they can log in/sign up properly.
+      return supabaseResponse;
+    }
+
+    const url = request.nextUrl.clone();
+    url.pathname = profile.role === 'admin' ? '/admin' : '/dashboard';
     return NextResponse.redirect(url);
   }
 
