@@ -145,6 +145,6 @@ For bulk cutoff import, use these column headers:
 
 > **Note:** Exam, college, and branch names must match existing records in the database.
 
-## License
+## MIT
 
-MIT
+<!-- Git auto-sync test -->
